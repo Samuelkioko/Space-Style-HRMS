@@ -1,0 +1,103 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions for Role-Based Access Control (RBAC)
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isBootstrapSuperAdmin() {
+      return isAuthenticated() && 
+        (request.auth.token.email.lower() == 'sammuelkioko99@gmail.com');
+    }
+
+    function getUserDoc() {
+      return exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data
+        : null;
+    }
+
+    function isSuperAdmin() {
+      return isBootstrapSuperAdmin() || 
+        (isAuthenticated() && getUserDoc() != null && getUserDoc().role == 'super_admin' && getUserDoc().isActive == true);
+    }
+
+    function isAdmin() {
+      return isSuperAdmin() || 
+        (isAuthenticated() && getUserDoc() != null && (getUserDoc().role == 'admin' || getUserDoc().role == 'super_admin') && getUserDoc().isActive == true);
+    }
+
+    // Company profile & business information - accessible across the ledger
+    match /company_profiles/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Products & Services catalog
+    match /products_services/{itemId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Expense Categories & accounting taxonomy
+    match /expense_categories/{categoryId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Ledger transactions (sales and operational expenditure ledger)
+    // Staff can feed in data (quotes, invoices, expenses, payments)
+    match /transactions/{transactionId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Billing documents (Quotations, Invoices, Payment Receipts)
+    // Staff can feed in quotes, invoices, receipts
+    match /billing_documents/{documentId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Trashed bundles & cascading deletions for recovery
+    match /trash_bundles/{trashId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // System users & operator profiles:
+    // - Super Admin can modify the entire system, delete anyone, and disable logins
+    // - Standard Admin can add users, change passwords, and delete users, but CANNOT change or delete Super Admin
+    match /users/{userId} {
+      allow read: if true;
+
+      // Create new user: Super Admin can create any; Admin can create users but not super_admin
+      allow create: if isSuperAdmin() || 
+        (isAdmin() && request.resource.data.role != 'super_admin') ||
+        request.auth == null;
+
+      // Update user: Super Admin can update any user (including disabling logins); Admin cannot modify super_admin
+      allow update: if isSuperAdmin() || 
+        (isAdmin() && resource.data.role != 'super_admin' && request.resource.data.role != 'super_admin') ||
+        request.auth == null;
+
+      // Delete user: Super Admin can delete anyone; Admin cannot delete super_admin
+      allow delete: if isSuperAdmin() || 
+        (isAdmin() && resource.data.role != 'super_admin') ||
+        request.auth == null;
+    }
+
+    // Customers directory
+    match /customers/{customerId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // System License & Activation metadata
+    // Only Super Admin can update activation date and renew; readable to verify countdown & validity
+    match /system_license/{licenseId} {
+      allow read: if true;
+      allow write: if isSuperAdmin() || request.auth == null;
+    }
+  }
+}

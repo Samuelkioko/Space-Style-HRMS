@@ -1,0 +1,551 @@
+{
+  "entities": {
+    "company_profiles": {
+      "title": "Company Profile & Business Information",
+      "description": "Stores organization configuration, legal name, tax identification, contact details, default currency, and sync settings.",
+      "type": "object",
+      "properties": {
+        "businessName": {
+          "type": "string",
+          "description": "Trading or company name"
+        },
+        "legalEntityName": {
+          "type": "string",
+          "description": "Registered company entity name"
+        },
+        "taxId": {
+          "type": "string",
+          "description": "Tax Identification or KRA PIN"
+        },
+        "businessEmail": {
+          "type": "string",
+          "description": "Corporate or billing email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Business telephone or mobile support line"
+        },
+        "address": {
+          "type": "string",
+          "description": "Physical business address / office location"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Standard business currency (e.g. KES, USD, EUR, GBP, NGN, ZAR)"
+        },
+        "website": {
+          "type": "string",
+          "description": "Company website or customer portal"
+        },
+        "tagline": {
+          "type": "string",
+          "description": "Company motto or tagline"
+        },
+        "paymentOptions": {
+          "type": "object",
+          "description": "Payment remittance options (Bank, M-PESA/Mobile Money, instructions)"
+        },
+        "fiscalYearStartMonth": {
+          "type": "number",
+          "description": "Fiscal year start month (1-12)"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update"
+        }
+      }
+    },
+    "products_services": {
+      "title": "Products & Services Catalog",
+      "description": "Catalog of offered products and services with standardized unit prices and measurement units.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Product or service display name"
+        },
+        "type": {
+          "type": "string",
+          "description": "product or service"
+        },
+        "category": {
+          "type": "string",
+          "description": "Business category"
+        },
+        "unitPrice": {
+          "type": "number",
+          "description": "Selling price per unit/kg"
+        },
+        "unitType": {
+          "type": "string",
+          "description": "Measurement unit: units, kg, g, pcs, bags, boxes, liters, hours, service, meters"
+        },
+        "description": {
+          "type": "string",
+          "description": "Item description or specifications"
+        },
+        "sku": {
+          "type": "string",
+          "description": "Stock Keeping Unit or item reference code"
+        },
+        "inStock": {
+          "type": "number",
+          "description": "Available stock quantity"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether item is currently active for sales"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp of record modification"
+        }
+      }
+    },
+    "transactions": {
+      "title": "Financial Transactions",
+      "description": "Ledger entries including sales, expenses, cash inflows and disbursements.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Transaction title or brief description"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Monetary value"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type: sale, expense, transfer"
+        },
+        "category": {
+          "type": "string",
+          "description": "Classification category"
+        },
+        "date": {
+          "type": "string",
+          "description": "Transaction date YYYY-MM-DD"
+        },
+        "time": {
+          "type": "string",
+          "description": "Transaction time"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "description": "Payment channel: mobile_money, bank_transfer, card, cash, online"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional notes or remarks"
+        },
+        "customerOrVendor": {
+          "type": "string",
+          "description": "Customer, client or vendor name"
+        },
+        "referenceNo": {
+          "type": "string",
+          "description": "Invoice number or transaction reference code"
+        },
+        "status": {
+          "type": "string",
+          "description": "completed or pending"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Optional linked product or service ID"
+        },
+        "productName": {
+          "type": "string",
+          "description": "Linked product or service name"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Purchased quantity / number of units or kgs"
+        },
+        "unitPrice": {
+          "type": "number",
+          "description": "Calculated rate per unit"
+        },
+        "unitType": {
+          "type": "string",
+          "description": "Unit of measurement"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp of record modification"
+        }
+      }
+    },
+    "expense_categories": {
+      "title": "Expense Categories & Accounts",
+      "description": "Business expense accounts and categories used to classify and track company expenditures.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Category or expense account name"
+        },
+        "group": {
+          "type": "string",
+          "description": "Departmental grouping (e.g. Staff & Welfare, Utilities, Taxes, etc.)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of expense type"
+        },
+        "defaultAmount": {
+          "type": "number",
+          "description": "Standard recurring or budgeted amount"
+        },
+        "taxDeductible": {
+          "type": "boolean",
+          "description": "Whether this expense is tax deductible"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether this category is currently active for selection"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp of record modification"
+        }
+      }
+    },
+    "billing_documents": {
+      "title": "Quotations, Invoices and Receipts",
+      "description": "Commercial billing documents including proforma quotations, payment invoices, and official payment receipts for items and services.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Document type: quotation, invoice, or receipt"
+        },
+        "documentNumber": {
+          "type": "string",
+          "description": "Unique serialized identifier (e.g. QT-2026-001, INV-2026-001, REC-2026-001)"
+        },
+        "title": {
+          "type": "string",
+          "description": "Document subject/title"
+        },
+        "date": {
+          "type": "string",
+          "description": "Document issue date (YYYY-MM-DD)"
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "Payment due date or quotation validity date (YYYY-MM-DD)"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "Client or customer organization/individual name"
+        },
+        "customerEmail": {
+          "type": "string",
+          "description": "Client email address"
+        },
+        "customerPhone": {
+          "type": "string",
+          "description": "Client phone number"
+        },
+        "customerAddress": {
+          "type": "string",
+          "description": "Physical address or location"
+        },
+        "customerTaxId": {
+          "type": "string",
+          "description": "Customer Tax PIN / VAT number"
+        },
+        "items": {
+          "type": "array",
+          "description": "List of line items with quantity, rate, unit, and item details"
+        },
+        "subtotal": {
+          "type": "number",
+          "description": "Sum of all line items before tax and discount"
+        },
+        "taxRate": {
+          "type": "number",
+          "description": "Tax percentage (e.g. 16% VAT)"
+        },
+        "taxTotal": {
+          "type": "number",
+          "description": "Calculated tax amount"
+        },
+        "discountTotal": {
+          "type": "number",
+          "description": "Total discount subtracted"
+        },
+        "total": {
+          "type": "number",
+          "description": "Final total document amount"
+        },
+        "amountPaid": {
+          "type": "number",
+          "description": "Amount received to date"
+        },
+        "balanceDue": {
+          "type": "number",
+          "description": "Remaining unpaid balance"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "description": "Payment method used (for receipts or payments)"
+        },
+        "paymentReference": {
+          "type": "string",
+          "description": "Payment reference code or transaction receipt code"
+        },
+        "status": {
+          "type": "string",
+          "description": "Workflow status: draft, sent, accepted, paid, partially_paid, etc."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Document remarks or instructions"
+        },
+        "termsAndConditions": {
+          "type": "string",
+          "description": "Contractual terms and banking details"
+        },
+        "linkedQuotationId": {
+          "type": "string",
+          "description": "Document number of linked quote"
+        },
+        "linkedInvoiceId": {
+          "type": "string",
+          "description": "Document number of linked invoice"
+        },
+        "linkedTransactionId": {
+          "type": "string",
+          "description": "ID of linked ledger transaction"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp"
+        }
+      }
+    },
+    "trash_bundles": {
+      "title": "Trash Bin & Cascaded Deleted Items",
+      "description": "Stores deleted quotations, invoices, receipts, and their linked ledger transactions for safekeeping and one-click restoration.",
+      "type": "object",
+      "properties": {
+        "primaryItemType": {
+          "type": "string",
+          "description": "Type of primary deleted item (quotation, invoice, receipt, transaction)"
+        },
+        "primaryItemTitle": {
+          "type": "string",
+          "description": "Display title of the primary item"
+        },
+        "primaryItemNumber": {
+          "type": "string",
+          "description": "Document number or reference of primary item"
+        },
+        "primaryItemId": {
+          "type": "string",
+          "description": "Unique ID of primary item"
+        },
+        "trashedAt": {
+          "type": "string",
+          "description": "ISO timestamp when item was moved to trash"
+        },
+        "totalAmount": {
+          "type": "number",
+          "description": "Monetary value of primary item"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "Associated customer or vendor name"
+        },
+        "documents": {
+          "type": "array",
+          "description": "All deleted billing documents in this cascade bundle"
+        },
+        "transactions": {
+          "type": "array",
+          "description": "All cascaded ledger transactions in this bundle"
+        },
+        "description": {
+          "type": "string",
+          "description": "Summary explanation of the deleted bundle"
+        }
+      }
+    },
+    "users": {
+      "title": "System Users & Staff Profiles",
+      "description": "Registered operators, staff, and administrators with role-based access control and contact details.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "User business or login email"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Full name of staff member or administrator"
+        },
+        "username": {
+          "type": "string",
+          "description": "Unique login username or handle"
+        },
+        "role": {
+          "type": "string",
+          "description": "System role: super_admin, admin, staff, or user"
+        },
+        "disabledReason": {
+          "type": "string",
+          "description": "Reason for account suspension or login disablement (e.g. license_expired, suspended, custom)"
+        },
+        "disabledMessage": {
+          "type": "string",
+          "description": "Custom error message or license expiration notice displayed to user when login is disabled"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number"
+        },
+        "department": {
+          "type": "string",
+          "description": "Job title or operational department"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether the user account is active"
+        },
+        "password": {
+          "type": "string",
+          "description": "Hashed authentication password or credential for email login"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO creation timestamp"
+        },
+        "lastLoginAt": {
+          "type": "string",
+          "description": "ISO timestamp of most recent login"
+        }
+      }
+    },
+    "customers": {
+      "title": "Customer Directory",
+      "description": "Stores client records, contact numbers, email, physical delivery address, tax identification (KRA PIN), notes, and historical spending.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Client or company name"
+        },
+        "email": {
+          "type": "string",
+          "description": "Customer contact or billing email"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Customer telephone or mobile number"
+        },
+        "address": {
+          "type": "string",
+          "description": "Physical business address / office delivery location"
+        },
+        "taxId": {
+          "type": "string",
+          "description": "Customer Tax Identification / KRA PIN"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Internal customer remarks or payment terms"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update"
+        }
+      },
+      "required": ["name"]
+    },
+    "system_license": {
+      "title": "System License Configuration & Countdown",
+      "description": "Stores organization activation date, computed 1-year expiry, activation author, and licensing state.",
+      "type": "object",
+      "properties": {
+        "activationDate": {
+          "type": "string",
+          "description": "System activation date YYYY-MM-DD set by Super Administrator"
+        },
+        "expiryDate": {
+          "type": "string",
+          "description": "Computed 1-year expiration date YYYY-MM-DD"
+        },
+        "durationYears": {
+          "type": "number",
+          "description": "Duration in years (defaults to 1)"
+        },
+        "activatedBy": {
+          "type": "string",
+          "description": "Super administrator name or email who activated the license"
+        },
+        "activatedAt": {
+          "type": "string",
+          "description": "ISO timestamp when license was activated"
+        },
+        "notes": {
+          "type": "string",
+          "description": "License notes and details"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update"
+        }
+      },
+      "required": ["activationDate", "expiryDate"]
+    }
+  },
+  "firestore": {
+    "/company_profiles/{docId}": {
+      "schema": "company_profiles",
+      "description": "Company profile details, currency, tax pin, and business information"
+    },
+    "/products_services/{itemId}": {
+      "schema": "products_services",
+      "description": "Catalog of products and services with pricing and unit metrics"
+    },
+    "/expense_categories/{categoryId}": {
+      "schema": "expense_categories",
+      "description": "Configured business expense categories and accounts"
+    },
+    "/transactions/{transactionId}": {
+      "schema": "transactions",
+      "description": "Sales and expense ledger transaction records"
+    },
+    "/billing_documents/{documentId}": {
+      "schema": "billing_documents",
+      "description": "Commercial quotations, tax invoices, and payment receipts"
+    },
+    "/trash_bundles/{trashId}": {
+      "schema": "trash_bundles",
+      "description": "Trash bin storage for deleted quotations, invoices, receipts, and ledger items"
+    },
+    "/users/{userId}": {
+      "schema": "users",
+      "description": "System user profiles, roles (admin/staff), and credentials"
+    },
+    "/customers/{customerId}": {
+      "schema": "customers",
+      "description": "Client database directory with name, contact, KRA PIN, and address"
+    },
+    "/system_license/{licenseId}": {
+      "schema": "system_license",
+      "description": "System license activation date, 1-year computed expiration, and countdown metrics"
+    }
+  }
+}

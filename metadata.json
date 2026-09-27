@@ -1,0 +1,6 @@
+{
+  "name": "Executive Ledger",
+  "description": "Executive financial dashboard, sales, quotations, tax invoices, receipts, and cashbook management for MGATOR INDUSTRIES LTD.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
